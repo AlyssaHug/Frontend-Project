@@ -85,8 +85,7 @@ const gameState = {
             {
                 title: "Digital Ghosts: When Software Remains",
                 content:
-                    "Security researchers have found that some applications create backdoor access that allows them to remain active even after deletion. These digital ghosts can persist for <span class='highlight'>5</span> years or more.",
-            },
+†            },
         ],
     },
 };
