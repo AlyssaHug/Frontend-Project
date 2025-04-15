@@ -6,8 +6,10 @@
 }
 
 body {
-    background-color: #008080;
-    overflow: hidden;
+    background-image: url(/img/bg.jpg);
+    background-size: cover; /* or use "contain" */
+    background-repeat: no-repeat;
+    background-position: center;
     user-select: none;
 }
 
@@ -27,21 +29,48 @@ body {
     display: flex;
     z-index: 1000;
 }
-
 .start-button {
     display: flex;
     align-items: center;
     padding: 0 10px;
-    height: 100%;
-    background: linear-gradient(to bottom, #388e3c, #1b5e20);
+    height: 30px;
+    background: linear-gradient(
+        to bottom,
+        #2a8f31,
+        #2a8f31 50%,
+        #267429 50%,
+        #267429
+    );
     color: white;
     font-weight: bold;
+    font-family: "Arial", sans-serif;
+    font-size: 14px;
     cursor: pointer;
-    border-right: 1px solid #333;
+    border-radius: 3px;
+    border: 1px solid #215b1c;
+    box-shadow: inset 1px 1px 0px rgba(255, 255, 255, 0.3);
+    text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.5);
 }
 
 .start-button:hover {
-    background: linear-gradient(to bottom, #4caf50, #388e3c);
+    background: linear-gradient(
+        to bottom,
+        #36a640,
+        #36a640 50%,
+        #2f9235 50%,
+        #2f9235
+    );
+}
+
+.start-button:active {
+    background: linear-gradient(
+        to bottom,
+        #226d27,
+        #226d27 50%,
+        #1d5f21 50%,
+        #1d5f21
+    );
+    box-shadow: inset 1px 1px 3px rgba(0, 0, 0, 0.2);
 }
 
 .taskbar-items {
@@ -247,7 +276,7 @@ body {
 }
 
 #fox-speech:after {
-    content: '';
+    content: "";
     position: absolute;
     bottom: -10px;
     right: 20px;
@@ -257,7 +286,7 @@ body {
 }
 
 #fox-speech:before {
-    content: '';
+    content: "";
     position: absolute;
     bottom: -13px;
     right: 18px;
@@ -299,8 +328,6 @@ body {
     color: #0078d7;
     font-weight: bold;
 }
-`;
-
 .speech-bubble {
     position: absolute;
     top: -60px;
