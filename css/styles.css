@@ -6,8 +6,10 @@
 }
 
 body {
-    background-color: #008080;
-    overflow: hidden;
+    background-image: url(img/bg.jpg);
+    background-size: cover; /* or use "contain" */
+    background-repeat: no-repeat;
+    background-position: center;
     user-select: none;
 }
 
@@ -27,21 +29,48 @@ body {
     display: flex;
     z-index: 1000;
 }
-
 .start-button {
     display: flex;
     align-items: center;
     padding: 0 10px;
-    height: 100%;
-    background: linear-gradient(to bottom, #388e3c, #1b5e20);
+    height: 30px;
+    background: linear-gradient(
+        to bottom,
+        #2a8f31,
+        #2a8f31 50%,
+        #267429 50%,
+        #267429
+    );
     color: white;
     font-weight: bold;
+    font-family: "Arial", sans-serif;
+    font-size: 14px;
     cursor: pointer;
-    border-right: 1px solid #333;
+    border-radius: 3px;
+    border: 1px solid #215b1c;
+    box-shadow: inset 1px 1px 0px rgba(255, 255, 255, 0.3);
+    text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.5);
 }
 
 .start-button:hover {
-    background: linear-gradient(to bottom, #4caf50, #388e3c);
+    background: linear-gradient(
+        to bottom,
+        #36a640,
+        #36a640 50%,
+        #2f9235 50%,
+        #2f9235
+    );
+}
+
+.start-button:active {
+    background: linear-gradient(
+        to bottom,
+        #226d27,
+        #226d27 50%,
+        #1d5f21 50%,
+        #1d5f21
+    );
+    box-shadow: inset 1px 1px 3px rgba(0, 0, 0, 0.2);
 }
 
 .taskbar-items {
@@ -224,54 +253,87 @@ body {
     margin-left: 5px;
 }
 
-#fox-container {
+#fox-speech {
+    position: absolute;
+    background-color: white;
+    border: 2px solid #0078d7;
+    border-radius: 12px;
+    padding: 10px 15px;
+    bottom: 70px;
+    right: 170px;
+    width: 300px; /* Wider speech bubble */
+    max-width: 80%;
+    max-height: 200px; /* Added max-height */
+    overflow-y: auto; /* Added scrolling for overflow content */
+    font-size: 14px;
+    line-height: 1.4; /* Added line-height for better readability */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    z-index: 1000;
+    transition: opacity 0.3s ease;
+    opacity: 1;
+}
+
+#fox-speech.hidden {
+    opacity: 0;
+    pointer-events: none;
+}
+
+#fox-speech:after {
+    content: "";
+    position: absolute;
+    bottom: -10px;
+    right: 20px;
+    border-width: 10px 10px 0;
+    border-style: solid;
+    border-color: white transparent;
+}
+
+#fox-speech:before {
+    content: "";
+    position: absolute;
+    bottom: -13px;
+    right: 18px;
+    border-width: 12px 12px 0;
+    border-style: solid;
+    border-color: #0078d7 transparent;
+    z-index: -1;
+}
+
+/* Add hint button */
+#hint-button {
     position: fixed;
     bottom: 40px;
-    right: 20px;
-    width: 120px;
-    height: 120px;
-    z-index: 900;
-}
-/* Add to css/styles.css */
-
-/* Highlight Recycle Bin when dragging over */
-#recycle-bin.drop-active {
-    background-color: rgba(255, 255, 0, 0.3);
-}
-
-/* Puzzle elements in My Computer */
-.puzzle-entry {
-    padding: 5px;
-    margin: 3px;
-    background: #fff;
-    border: 1px solid #999;
+    left: 20px;
+    background-color: #0078d7;
+    color: white;
+    border: none;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    font-size: 20px;
     cursor: pointer;
+    z-index: 1000;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
 }
 
-.puzzle-entry.correct {
-    background: #d4edda;
-}
-
-.puzzle-entry.incorrect {
-    background: #f8d7da;
-}
-
-/* Glitched icon effect */
-.file-icon.glitched {
-    animation: glitch 0.5s infinite;
-}
+/* Highlight the fox when hovering to indicate it can be clicked */
 #fox {
-    width: 100%;
-    height: 100%;
-    background-image: url("/api/placeholder/120/120");
-    background-size: contain;
-    background-repeat: no-repeat;
     cursor: pointer;
+    transition: transform 0.2s ease;
+}
+
+#fox:hover {
+    transform: scale(1.1);
+}
+/* Add a subtle glow effect for the hint text */
+.hint-text {
+    color: #0078d7;
+    font-weight: bold;
 }
 
 .speech-bubble {
     position: absolute;
-    top: -60px;
+    bottom: 60px;
     right: 60px;
     background-color: white;
     padding: 10px;
@@ -287,7 +349,7 @@ body {
 .speech-bubble:after {
     content: "";
     position: absolute;
-    bottom: -10px;
+    top: 10px;
     right: 40px;
     border-width: 10px 10px 0;
     border-style: solid;
@@ -451,4 +513,14 @@ body {
 
 .warning {
     color: #d32f2f;
+}
+
+.fox {
+    position: relative;
+}
+.foxy {
+    width: 20em;
+    position: absolute;
+    bottom: -7em;
+    right: -5em;
 }

@@ -202,16 +202,16 @@ function createDesktopIcon(name, left, top, type, id) {
     let iconImg;
     switch (type) {
         case "folder":
-            iconImg = "/api/placeholder/42/42";
+            iconImg = "img/folder.png";
             break;
         case "browser":
-            iconImg = "/api/placeholder/42/42";
+            iconImg = "img/search.png";
             break;
         case "text":
-            iconImg = "/api/placeholder/42/42";
+            iconImg = "img/text.png";
             break;
         case "system":
-            iconImg = "/api/placeholder/42/42";
+            iconImg = "img/system.png";
             break;
         default:
             iconImg = "/api/placeholder/42/42";
