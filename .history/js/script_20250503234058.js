@@ -646,7 +646,7 @@ HOW TO PLAY:
 - Double-click on desktop icons to open applications and folders
 - Drag and drop files to organize them
 - Use the FoxSearch browser to search the web
-- Interact with the fox character for messages
+- Interact with the fox character for hints and messages
 
 2. Game Mechanics:
 - Organize files by dragging them to folders
@@ -655,12 +655,30 @@ HOW TO PLAY:
 - Pay attention to highlighted letters in search results
 - Watch out for pop-up messages and system notifications
 
-3. Important Tips:
+3. Game Progression:
+- The game has 5 stages that progress as you interact with the system
+- Each stage reveals more about the story
+- Look for clues in:
+  * Search results
+  * Text documents
+  * System logs
+  * Pop-up messages
+
+4. Important Tips:
+- Keep track of highlighted letters you find
 - Read all text documents carefully
 - Pay attention to the fox's messages
+- Check the system information for status updates
+- Some actions may trigger special events
 
+5. Controls:
+- Left-click: Select items
+- Double-click: Open files/folders
+- Drag and drop: Move files
+- Close windows: Click the X button
+- Interact with fox: Click on the fox character
 
-The more you explore, the more you'll discover about the FoxSearch system!
+Remember: The more you explore, the more you'll discover about the mysterious FoxSearch system!
 
 Good luck, and watch out for the fox...`;
     } else if (name === "Random Notes") {
@@ -716,18 +734,7 @@ ${gameState.codeWord[0].substring(
 Find all the highlighted letters in search results and enter the code in a comment.`;
     }
 
-    const textarea = document.createElement("textarea");
-    textarea.style.width = "100%";
-    textarea.style.height = "100%";
-    textarea.style.resize = "none";
-    textarea.style.border = "none";
-    textarea.style.padding = "5px";
-    textarea.style.fontFamily = "monospace";
-    textarea.style.fontSize = "14px";
-    textarea.style.lineHeight = "1.5";
-    textarea.value = fileContent;
-    textarea.readOnly = true;
-    content.appendChild(textarea);
+    content.innerHTML = `<textarea style="width: 100%; height: 100%; resize: none; border: none; padding: 5px;">${fileContent}</textarea>`;
 
     return notepad;
 }

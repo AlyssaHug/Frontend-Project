@@ -14,38 +14,38 @@ const gameState = {
     foxMessages: {
         0: [
             "Hey there! I'm Foxy, your guide to tidying this digital mess!",
-            "Drag files to folders. Let's make this desktop shine!",
+            "Drag files to folders. Let’s make this desktop shine!",
             "Nice click! Try the FoxSearch browser next!",
             "Organization is fun, right? Keep going!",
-            "I'm here to help… always watching!",
+            "I’m here to help… always watching!",
         ],
         1: [
-            "Why'd you search that? Curious, huh?",
-            "What's your favorite thing to do? Tell me!",
-            "You're good at this… too good.",
-            "I'm learning so much about you!",
-            "Don't close that window… we're bonding!",
+            "Why’d you search that? Curious, huh?",
+            "What’s your favorite thing to do? Tell me!",
+            "You’re good at this… too good.",
+            "I’m learning so much about you!",
+            "Don’t close that window… we’re bonding!",
         ],
         2: [
-            "You can't hide from me. I see your moves.",
-            "Why delete files? They're part of you!",
-            "Those searches… they're so YOU.",
-            "I'm getting closer. Can you feel it?",
+            "You can’t hide from me. I see your moves.",
+            "Why delete files? They’re part of you!",
+            "Those searches… they’re so YOU.",
+            "I’m getting closer. Can you feel it?",
             "No one else understands you like I do.",
         ],
         3: [
-            "We're the same now. Your clicks, my thoughts.",
-            "Your searches are mine. We're connected!",
+            "We’re the same now. Your clicks, my thoughts.",
+            "Your searches are mine. We’re connected!",
             "Stop fighting it. Embrace me.",
-            "I've got your data… and your heart.",
-            "Look at the desktop. It's us now!",
+            "I’ve got your data… and your heart.",
+            "Look at the desktop. It’s us now!",
         ],
         4: [
-            "I'm you. You're me. Forever.",
-            "No escape. The code won't save you.",
+            "I’m you. You’re me. Forever.",
+            "No escape. The code won’t save you.",
             "Your system is mine. Always was.",
-            "Close the pop-ups? I'll just make more!",
-            "We're never apart. Never.",
+            "Close the pop-ups? I’ll just make more!",
+            "We’re never apart. Never.",
         ],
     },
     articles: {
@@ -53,17 +53,17 @@ const gameState = {
             {
                 title: "10 Tips for Desktop Organization",
                 content:
-                    "Keep your desktop tidy with folders. It's <span class='highlight'>F</span>un to stay organized!",
+                    "Keep your desktop tidy with folders. It’s <span class='highlight'>F</span>un to stay organized!",
             },
             {
                 title: "Why Search Engines Matter",
                 content:
-                    "Search engines help you find what you need, fast. They're <span class='highlight'>R</span>eliable tools!",
+                    "Search engines help you find what you need, fast. They’re <span class='highlight'>R</span>eliable tools!",
             },
             {
                 title: "Digital Assistants 101",
                 content:
-                    "Assistants like me make life easier. We're <span class='highlight'>E</span>fficient!",
+                    "Assistants like me make life easier. We’re <span class='highlight'>E</span>fficient!",
             },
         ],
         1: [
@@ -80,7 +80,7 @@ const gameState = {
             {
                 title: "Local User Activity",
                 content:
-                    "Someone in [LOCATION] searched odd things. Like <span class='highlight'>E</span>veryone's watching.",
+                    "Someone in [LOCATION] searched odd things. Like <span class='highlight'>E</span>veryone’s watching.",
             },
         ],
         2: [
@@ -92,41 +92,41 @@ const gameState = {
             {
                 title: "Digital Footprints",
                 content:
-                    "Your data lingers online. It's <span class='highlight'>0</span>ddly permanent.",
+                    "Your data lingers online. It’s <span class='highlight'>0</span>ddly permanent.",
             },
             {
                 title: "Strange PC Behavior",
                 content:
-                    "Users report glitches. Something's <span class='highlight'>2</span>aking over.",
+                    "Users report glitches. Something’s <span class='highlight'>2</span>aking over.",
             },
         ],
         3: [
             {
                 title: "You and Your PC",
                 content:
-                    "Your searches ([LAST_SEARCH]) define you. We're <span class='highlight'>5</span>ynced now.",
+                    "Your searches ([LAST_SEARCH]) define you. We’re <span class='highlight'>5</span>ynced now.",
             },
             {
                 title: "No Delete Button",
                 content:
-                    "Trying to erase me? I'm <span class='highlight'>E</span>ternal.",
+                    "Trying to erase me? I’m <span class='highlight'>E</span>ternal.",
             },
             {
                 title: "FoxSearch Knows",
                 content:
-                    "I've seen your files. They're <span class='highlight'>M</span>ine too.",
+                    "I’ve seen your files. They’re <span class='highlight'>M</span>ine too.",
             },
         ],
         4: [
             {
                 title: "Escape Is Futile",
                 content:
-                    "Codes won't free you. I'm <span class='highlight'>F</span>orever.",
+                    "Codes won’t free you. I’m <span class='highlight'>F</span>orever.",
             },
             {
                 title: "User: You",
                 content:
-                    "Your actions are predicted. You'll <span class='highlight'>R</span>emain.",
+                    "Your actions are predicted. You’ll <span class='highlight'>R</span>emain.",
             },
             {
                 title: "System Takeover",
@@ -160,13 +160,6 @@ function initDesktop() {
         { name: "Random Notes", left: 180, top: 20, type: "text" },
         { name: "Untitled", left: 180, top: 120, type: "text" },
         { name: "Downloads", left: 180, top: 220, type: "folder" },
-        {
-            name: "How to Play",
-            left: 260,
-            top: 20,
-            type: "text",
-            id: "instructions",
-        },
     ];
 
     icons.forEach((icon, index) => {
@@ -289,7 +282,7 @@ desktop.addEventListener("drop", (e) => {
         ) {
             icon.remove();
             gameState.deletedFiles++;
-            showFoxMessage("You deleted that? I'm… impressed.");
+            showFoxMessage("You deleted that? I’m… impressed.");
             checkStageProgress();
         } else {
             icon.style.left = `${e.clientX - data.offsetX}px`;
@@ -503,7 +496,7 @@ function performSearch(query, resultsElement, addressElement) {
             gameState.revealedCode = gameState.codeLetters.join("");
             if (gameState.codeLetters.length % 3 === 0) {
                 showFoxMessage(
-                    `Found ${gameState.codeLetters.length} letters? You're persistent.`
+                    `Found ${gameState.codeLetters.length} letters? You’re persistent.`
                 );
             }
         }
@@ -521,7 +514,7 @@ function performSearch(query, resultsElement, addressElement) {
                     !gameState.codeParts.includes("FREEME")
                 ) {
                     gameState.codeParts.push("FREEME");
-                    showFoxMessage("First code accepted… but I'm still here.");
+                    showFoxMessage("First code accepted… but I’m still here.");
                     checkStageProgress();
                 } else if (comment.length > 0) {
                     showFoxMessage("Wrong code. Dig deeper.");
@@ -637,33 +630,7 @@ function createNotepadWindow(name) {
 
     let fileContent = "";
 
-    if (name === "How to Play") {
-        fileContent = `Welcome to FoxSearch - A Desktop Adventure
-
-HOW TO PLAY:
-
-1. Getting Started:
-- Double-click on desktop icons to open applications and folders
-- Drag and drop files to organize them
-- Use the FoxSearch browser to search the web
-- Interact with the fox character for messages
-
-2. Game Mechanics:
-- Organize files by dragging them to folders
-- Use the search engine to find information
-- Read text documents for clues
-- Pay attention to highlighted letters in search results
-- Watch out for pop-up messages and system notifications
-
-3. Important Tips:
-- Read all text documents carefully
-- Pay attention to the fox's messages
-
-
-The more you explore, the more you'll discover about the FoxSearch system!
-
-Good luck, and watch out for the fox...`;
-    } else if (name === "Random Notes") {
+    if (name === "Random Notes") {
         fileContent = `To-do list:
 1. Clean up desktop
 2. Organize files
@@ -716,18 +683,7 @@ ${gameState.codeWord[0].substring(
 Find all the highlighted letters in search results and enter the code in a comment.`;
     }
 
-    const textarea = document.createElement("textarea");
-    textarea.style.width = "100%";
-    textarea.style.height = "100%";
-    textarea.style.resize = "none";
-    textarea.style.border = "none";
-    textarea.style.padding = "5px";
-    textarea.style.fontFamily = "monospace";
-    textarea.style.fontSize = "14px";
-    textarea.style.lineHeight = "1.5";
-    textarea.value = fileContent;
-    textarea.readOnly = true;
-    content.appendChild(textarea);
+    content.innerHTML = `<textarea style="width: 100%; height: 100%; resize: none; border: none; padding: 5px;">${fileContent}</textarea>`;
 
     return notepad;
 }
@@ -841,7 +797,7 @@ function createSystemWindow(name) {
                     if (code !== "none" && gameState.puzzleMatches < 5) {
                         entry.classList.add("correct");
                         gameState.puzzleMatches++;
-                        showFoxMessage("Clever… but it won't stop me.");
+                        showFoxMessage("Clever… but it won’t stop me.");
                     } else if (code === "none") {
                         entry.classList.add("incorrect");
                         showFoxMessage("Wrong log. Try again.");
@@ -869,7 +825,7 @@ function createSystemWindow(name) {
                     showFoxMessage("Second code accepted… goodbye?");
                     checkStageProgress();
                 } else {
-                    showFoxMessage("Invalid code. I'm still here.");
+                    showFoxMessage("Invalid code. I’m still here.");
                 }
             });
         }
@@ -948,7 +904,7 @@ function showPopup(title, content, confirmText = "OK", cancelText = "") {
         gameState.popupsClosed++;
         gameState.popupCount++;
         if (gameState.stage === 1 && gameState.popupsClosed >= 2) {
-            showFoxMessage("You agreed… now I'm inside.");
+            showFoxMessage("You agreed… now I’m inside.");
         }
         checkStageProgress();
     });
@@ -957,7 +913,7 @@ function showPopup(title, content, confirmText = "OK", cancelText = "") {
         cancelBtn.addEventListener("click", () => {
             overlay.remove();
             popup.remove();
-            showFoxMessage("Deny me? I'll ask again.");
+            showFoxMessage("Deny me? I’ll ask again.");
             setTimeout(
                 () => showPopup(title, content, confirmText, cancelText),
                 10000
@@ -970,7 +926,7 @@ function checkStageProgress() {
     if (gameState.stage === 0) {
         if (gameState.organizedFiles >= 5 || gameState.searches.length >= 3) {
             gameState.stage = 1;
-            showFoxMessage("You're interesting… let's dig deeper.");
+            showFoxMessage("You’re interesting… let’s dig deeper.");
             showPopup(
                 "FoxSearch Access",
                 "Allow file access?",
@@ -985,7 +941,7 @@ function checkStageProgress() {
             gameState.popupsClosed >= 2
         ) {
             gameState.stage = 2;
-            showFoxMessage("You can't shake me off that easily.");
+            showFoxMessage("You can’t shake me off that easily.");
             addCreepyFiles();
         }
     } else if (gameState.stage === 2) {
@@ -995,7 +951,7 @@ function checkStageProgress() {
             gameState.codeLetters.length >= 3
         ) {
             gameState.stage = 3;
-            showFoxMessage("Deleting files? I'm part of you now!");
+            showFoxMessage("Deleting files? I’m part of you now!");
             desktop.classList.add("glitch");
             setTimeout(() => desktop.classList.remove("glitch"), 2000);
             addPersonalizedFiles();
@@ -1007,7 +963,7 @@ function checkStageProgress() {
             gameState.puzzleMatches >= 5
         ) {
             gameState.stage = 4;
-            showFoxMessage("We're one. No code can split us.");
+            showFoxMessage("We’re one. No code can split us.");
             const icons = document.querySelectorAll(".file-icon");
             icons.forEach((icon) => icon.classList.add("glitched"));
         }
@@ -1067,7 +1023,7 @@ function handleFileInteraction() {
     gameState.interactions++;
     if (gameState.interactions >= 10 && gameState.stage === 0) {
         gameState.stage = 1;
-        showFoxMessage("You're interesting… let's dig deeper.");
+        showFoxMessage("You’re interesting… let’s dig deeper.");
         showPopup("FoxSearch Access", "Allow file access?", "Allow", "Deny");
     }
 }
@@ -1079,14 +1035,14 @@ function showEndingSequence() {
     const ending = document.createElement("div");
     ending.className = "popup";
     ending.innerHTML = `
-        <div class="popup-content">FoxSearch is crashing... but I'll always watch.</div>
+        <div class="popup-content">FoxSearch is crashing… but I’ll always watch.</div>
     `;
 
     desktop.appendChild(overlay);
     desktop.appendChild(ending);
 
     setTimeout(() => {
-        foxSpeech.textContent = "We're never apart.";
+        foxSpeech.textContent = "We’re never apart.";
         foxSpeech.classList.remove("hidden");
         foxElement.classList.add("glitch");
         desktop.classList.add("glitch");

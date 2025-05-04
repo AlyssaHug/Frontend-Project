@@ -655,12 +655,21 @@ HOW TO PLAY:
 - Pay attention to highlighted letters in search results
 - Watch out for pop-up messages and system notifications
 
-3. Important Tips:
-- Read all text documents carefully
-- Pay attention to the fox's messages
+4. Important Tips:
+
+<span class="highlight">Read all text documents carefully</span>
+<span class="highlight">Pay attention to the fox's messages</span>
 
 
-The more you explore, the more you'll discover about the FoxSearch system!
+
+5. Controls:
+- Left-click: Select items
+- Double-click: Open files/folders
+- Drag and drop: Move files
+- Close windows: Click the X button
+- Interact with fox: Click on the fox character
+
+Remember: The more you explore, the more you'll discover about the mysterious FoxSearch system!
 
 Good luck, and watch out for the fox...`;
     } else if (name === "Random Notes") {
@@ -716,18 +725,7 @@ ${gameState.codeWord[0].substring(
 Find all the highlighted letters in search results and enter the code in a comment.`;
     }
 
-    const textarea = document.createElement("textarea");
-    textarea.style.width = "100%";
-    textarea.style.height = "100%";
-    textarea.style.resize = "none";
-    textarea.style.border = "none";
-    textarea.style.padding = "5px";
-    textarea.style.fontFamily = "monospace";
-    textarea.style.fontSize = "14px";
-    textarea.style.lineHeight = "1.5";
-    textarea.value = fileContent;
-    textarea.readOnly = true;
-    content.appendChild(textarea);
+    content.innerHTML = `<textarea style="width: 100%; height: 100%; resize: none; border: none; padding: 5px;">${fileContent}</textarea>`;
 
     return notepad;
 }

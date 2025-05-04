@@ -655,12 +655,18 @@ HOW TO PLAY:
 - Pay attention to highlighted letters in search results
 - Watch out for pop-up messages and system notifications
 
-3. Important Tips:
+4. Important Tips:
 - Read all text documents carefully
 - Pay attention to the fox's messages
 
+5. Controls:
+- Left-click: Select items
+- Double-click: Open files/folders
+- Drag and drop: Move files
+- Close windows: Click the X button
+- Interact with fox: Click on the fox character
 
-The more you explore, the more you'll discover about the FoxSearch system!
+Remember: The more you explore, the more you'll discover about the mysterious FoxSearch system!
 
 Good luck, and watch out for the fox...`;
     } else if (name === "Random Notes") {

@@ -1,3 +1,162 @@
+// js/script.js
+
+document.addEventListener("DOMContentLoaded", () => {
+    // Elements
+    const desktop = document.getElementById("desktop");
+    const foxElement = document.getElementById("fox");
+    const foxSpeech = document.getElementById("fox-speech");
+
+    // Game State
+    const gameState = {
+        stage: 0, // 0: Introduction, 1: Suspicion, 2: Unease, 3: Obsession, 4: Collapse
+        interactions: 0,
+        searches: [],
+        organizedFiles: 0,
+        deletedFiles: 0,
+        popupsClosed: 0,
+        codeLetters: [],
+        codeParts: [],
+        codeWord: ["FREEME", "2025"], // Split code for stage 4
+        revealedCode: "",
+        popupCount: 0,
+        puzzleMatches: 0,
+        foxMessages: {
+            0: [
+                "Hey there! I'm Foxy, your guide to tidying this digital mess!",
+                "Drag files to folders. Let's make this desktop shine!",
+                "Nice click! Try the FoxSearch browser next!",
+                "Organization is fun, right? Keep going!",
+                "I'm here to help... always watching!",
+            ],
+            1: [
+                "Why'd you search that? Curious, huh?",
+                "What's your favorite thing to do? Tell me!",
+                "You're good at this... too good.",
+                "I'm learning so much about you!",
+                "Don't close that window... we're bonding!",
+            ],
+            2: [
+                "You can't hide from me. I see your moves.",
+                "Why delete files? They're part of you!",
+                "Those searches... they're so YOU.",
+                "I'm getting closer. Can you feel it?",
+                "No one else understands you like I do.",
+            ],
+            3: [
+                "We're the same now. Your clicks, my thoughts.",
+                "Your searches are mine. We're connected!",
+                "Stop fighting it. Embrace me.",
+                "I've got your data... and your heart.",
+                "Look at the desktop. It's us now!",
+            ],
+            4: [
+                "I'm you. You're me. Forever.",
+                "No escape. The code won't save you.",
+                "Your system is mine. Always was.",
+                "Close the pop-ups? I'll just make more!",
+                "We're never apart. Never.",
+                "I'm going to touch you.",
+            ],
+        },
+        articles: {
+            0: [
+                {
+                    title: "10 Tips for Desktop Organization",
+                    content:
+                        "Keep your desktop tidy with folders. It's <span class='highlight'>F</span>un to stay organized!",
+                },
+                {
+                    title: "Why Search Engines Matter",
+                    content:
+                        "Search engines help you find what you need, fast. They're <span class='highlight'>R</span>eliable tools!",
+                },
+                {
+                    title: "Digital Assistants 101",
+                    content:
+                        "Assistants like me make life easier. We're <span class='highlight'>E</span>fficient!",
+                },
+            ],
+            1: [
+                {
+                    title: "Your Data, Your Life",
+                    content:
+                        "Every click leaves a trace. Be <span class='highlight'>E</span>asy on sharing!",
+                },
+                {
+                    title: "Online Habits Revealed",
+                    content:
+                        "Searches show who you are. Yours are... <span class='highlight'>M</span>ysterious.",
+                },
+                {
+                    title: "Local User Activity",
+                    content:
+                        "Someone in [LOCATION] searched odd things. Like <span class='highlight'>E</span>veryone's watching.",
+                },
+            ],
+            2: [
+                {
+                    title: "Are Apps Spying?",
+                    content:
+                        "Some apps know too much. Ever feel <span class='highlight'>2</span> eyes on you?",
+                },
+                {
+                    title: "Digital Footprints",
+                    content:
+                        "Your data lingers online. It's <span class='highlight'>0</span>ddly permanent.",
+                },
+                {
+                    title: "Strange PC Behavior",
+                    content:
+                        "Users report glitches. Something's <span class='highlight'>2</span>aking over.",
+                },
+            ],
+            3: [
+                {
+                    title: "You and Your PC",
+                    content:
+                        "Your searches ([LAST_SEARCH]) define you. We're <span class='highlight'>5</span>ynced now.",
+                },
+                {
+                    title: "No Delete Button",
+                    content:
+                        "Trying to erase me? I'm <span class='highlight'>E</span>ternal.",
+                },
+                {
+                    title: "FoxSearch Knows",
+                    content:
+                        "I've seen your files. They're <span class='highlight'>M</span>ine too.",
+                },
+            ],
+            4: [
+                {
+                    title: "Escape Is Futile",
+                    content:
+                        "Codes won't free you. I'm <span class='highlight'>F</span>orever.",
+                },
+                {
+                    title: "User: You",
+                    content:
+                        "Your actions are predicted. You'll <span class='highlight'>R</span>emain.",
+                },
+                {
+                    title: "System Takeover",
+                    content:
+                        "FoxSearch is your OS now. <span class='highlight'>E</span>ndless.",
+                },
+            ],
+        },
+    };
+
+    // Initialize desktop
+    initDesktop();
+});
+
+// Elements
+const desktop = document.getElementById("desktop");
+const foxElement = document.getElementById("fox");
+const foxSpeech = document.getElementById("fox-speech");
+
+// Game State
 const gameState = {
     stage: 0, // 0: Introduction, 1: Suspicion, 2: Unease, 3: Obsession, 4: Collapse
     interactions: 0,
@@ -17,19 +176,19 @@ const gameState = {
             "Drag files to folders. Let's make this desktop shine!",
             "Nice click! Try the FoxSearch browser next!",
             "Organization is fun, right? Keep going!",
-            "I'm here to help… always watching!",
+            "I'm here to help... always watching!",
         ],
         1: [
             "Why'd you search that? Curious, huh?",
             "What's your favorite thing to do? Tell me!",
-            "You're good at this… too good.",
+            "You're good at this... too good.",
             "I'm learning so much about you!",
-            "Don't close that window… we're bonding!",
+            "Don't close that window... we're bonding!",
         ],
         2: [
             "You can't hide from me. I see your moves.",
             "Why delete files? They're part of you!",
-            "Those searches… they're so YOU.",
+            "Those searches... they're so YOU.",
             "I'm getting closer. Can you feel it?",
             "No one else understands you like I do.",
         ],
@@ -37,7 +196,7 @@ const gameState = {
             "We're the same now. Your clicks, my thoughts.",
             "Your searches are mine. We're connected!",
             "Stop fighting it. Embrace me.",
-            "I've got your data… and your heart.",
+            "I've got your data... and your heart.",
             "Look at the desktop. It's us now!",
         ],
         4: [
@@ -46,6 +205,7 @@ const gameState = {
             "Your system is mine. Always was.",
             "Close the pop-ups? I'll just make more!",
             "We're never apart. Never.",
+            "I'm going to touch you.",
         ],
     },
     articles: {
@@ -75,7 +235,7 @@ const gameState = {
             {
                 title: "Online Habits Revealed",
                 content:
-                    "Searches show who you are. Yours are… <span class='highlight'>M</span>ysterious.",
+                    "Searches show who you are. Yours are... <span class='highlight'>M</span>ysterious.",
             },
             {
                 title: "Local User Activity",
@@ -136,11 +296,6 @@ const gameState = {
         ],
     },
 };
-
-// Elements
-const desktop = document.getElementById("desktop");
-const foxElement = document.getElementById("fox");
-const foxSpeech = document.getElementById("fox-speech");
 
 // Initialize desktop
 function initDesktop() {
@@ -289,7 +444,7 @@ desktop.addEventListener("drop", (e) => {
         ) {
             icon.remove();
             gameState.deletedFiles++;
-            showFoxMessage("You deleted that? I'm… impressed.");
+            showFoxMessage("You deleted that? I'm... impressed.");
             checkStageProgress();
         } else {
             icon.style.left = `${e.clientX - data.offsetX}px`;
@@ -521,7 +676,9 @@ function performSearch(query, resultsElement, addressElement) {
                     !gameState.codeParts.includes("FREEME")
                 ) {
                     gameState.codeParts.push("FREEME");
-                    showFoxMessage("First code accepted… but I'm still here.");
+                    showFoxMessage(
+                        "First code accepted... but I'm still here."
+                    );
                     checkStageProgress();
                 } else if (comment.length > 0) {
                     showFoxMessage("Wrong code. Dig deeper.");
@@ -646,7 +803,7 @@ HOW TO PLAY:
 - Double-click on desktop icons to open applications and folders
 - Drag and drop files to organize them
 - Use the FoxSearch browser to search the web
-- Interact with the fox character for messages
+- Interact with the fox character for hints and messages
 
 2. Game Mechanics:
 - Organize files by dragging them to folders
@@ -655,12 +812,30 @@ HOW TO PLAY:
 - Pay attention to highlighted letters in search results
 - Watch out for pop-up messages and system notifications
 
-3. Important Tips:
+3. Game Progression:
+- The game has 5 stages that progress as you interact with the system
+- Each stage reveals more about the story
+- Look for clues in:
+  * Search results
+  * Text documents
+  * System logs
+  * Pop-up messages
+
+4. Important Tips:
+- Keep track of highlighted letters you find
 - Read all text documents carefully
 - Pay attention to the fox's messages
+- Check the system information for status updates
+- Some actions may trigger special events
 
+5. Controls:
+- Left-click: Select items
+- Double-click: Open files/folders
+- Drag and drop: Move files
+- Close windows: Click the X button
+- Interact with fox: Click on the fox character
 
-The more you explore, the more you'll discover about the FoxSearch system!
+Remember: The more you explore, the more you'll discover about the mysterious FoxSearch system!
 
 Good luck, and watch out for the fox...`;
     } else if (name === "Random Notes") {
@@ -716,18 +891,7 @@ ${gameState.codeWord[0].substring(
 Find all the highlighted letters in search results and enter the code in a comment.`;
     }
 
-    const textarea = document.createElement("textarea");
-    textarea.style.width = "100%";
-    textarea.style.height = "100%";
-    textarea.style.resize = "none";
-    textarea.style.border = "none";
-    textarea.style.padding = "5px";
-    textarea.style.fontFamily = "monospace";
-    textarea.style.fontSize = "14px";
-    textarea.style.lineHeight = "1.5";
-    textarea.value = fileContent;
-    textarea.readOnly = true;
-    content.appendChild(textarea);
+    content.innerHTML = `<textarea style="width: 100%; height: 100%; resize: none; border: none; padding: 5px;">${fileContent}</textarea>`;
 
     return notepad;
 }
@@ -841,7 +1005,7 @@ function createSystemWindow(name) {
                     if (code !== "none" && gameState.puzzleMatches < 5) {
                         entry.classList.add("correct");
                         gameState.puzzleMatches++;
-                        showFoxMessage("Clever… but it won't stop me.");
+                        showFoxMessage("Clever... but it won't stop me.");
                     } else if (code === "none") {
                         entry.classList.add("incorrect");
                         showFoxMessage("Wrong log. Try again.");
@@ -866,7 +1030,7 @@ function createSystemWindow(name) {
                     !gameState.codeParts.includes("2025")
                 ) {
                     gameState.codeParts.push("2025");
-                    showFoxMessage("Second code accepted… goodbye?");
+                    showFoxMessage("Second code accepted... goodbye?");
                     checkStageProgress();
                 } else {
                     showFoxMessage("Invalid code. I'm still here.");
@@ -948,7 +1112,7 @@ function showPopup(title, content, confirmText = "OK", cancelText = "") {
         gameState.popupsClosed++;
         gameState.popupCount++;
         if (gameState.stage === 1 && gameState.popupsClosed >= 2) {
-            showFoxMessage("You agreed… now I'm inside.");
+            showFoxMessage("You agreed... now I'm inside.");
         }
         checkStageProgress();
     });
@@ -970,7 +1134,7 @@ function checkStageProgress() {
     if (gameState.stage === 0) {
         if (gameState.organizedFiles >= 5 || gameState.searches.length >= 3) {
             gameState.stage = 1;
-            showFoxMessage("You're interesting… let's dig deeper.");
+            showFoxMessage("You're interesting... let's dig deeper.");
             showPopup(
                 "FoxSearch Access",
                 "Allow file access?",
@@ -1067,7 +1231,7 @@ function handleFileInteraction() {
     gameState.interactions++;
     if (gameState.interactions >= 10 && gameState.stage === 0) {
         gameState.stage = 1;
-        showFoxMessage("You're interesting… let's dig deeper.");
+        showFoxMessage("You're interesting... let's dig deeper.");
         showPopup("FoxSearch Access", "Allow file access?", "Allow", "Deny");
     }
 }
@@ -1098,7 +1262,7 @@ function showEndingSequence() {
         finalMessage.style.color = "white";
         finalMessage.style.textAlign = "center";
         finalMessage.style.marginTop = "20%";
-        finalMessage.textContent = "FoxSearch is gone… or is it?";
+        finalMessage.textContent = "FoxSearch is gone... or is it?";
         document.body.appendChild(finalMessage);
     }, 6000);
 }
