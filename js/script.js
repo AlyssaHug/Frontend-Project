@@ -1,13 +1,24 @@
+function generateRandomCode(length, numeric = false) {
+    const letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+    const numbers = "0123456789";
+    const chars = numeric ? numbers : letters;
+    let code = "";
+    for (let i = 0; i < length; i++) {
+        code += chars.charAt(Math.floor(Math.random() * chars.length));
+    }
+    return code;
+}
+
+// Game State
+const randomFirstCode = generateRandomCode(6); // Random 6-letter code
+const randomSecondCode = generateRandomCode(4, true); // Random 4-digit code
 const gameState = {
-    stage: 0, 
+    stage: 0, // 0: Introduction, 1: Suspicion, 2: Unease, 3: Obsession, 4: Collapse
     interactions: 0,
-    searches: [],
-    organizedFiles: 0,
-    deletedFiles: 0,
     popupsClosed: 0,
     codeLetters: [],
     codeParts: [],
-    codeWord: ["FREEME", "2025"], 
+    codeWord: [randomFirstCode, randomSecondCode], // Randomized codes
     revealedCode: "",
     popupCount: 0,
     puzzleMatches: 0,
@@ -27,7 +38,7 @@ const gameState = {
             "I’m learning so much about you! So much!",
             "Don’t close that window… we’re bonding!",
             "Hey! You're my friend! My only friend!",
-            "Please don't leave...you're so cool!"
+            "Please don't leave...you're so cool!",
         ],
         2: [
             "You can’t hide from me.",
@@ -35,14 +46,13 @@ const gameState = {
             "Those searches… they’re so YOU.",
             "I’m getting closer. Can you feel it?",
             "No one else understands you like I do. I'm all you have.",
-            "I love you so much! Don't leave, I need you!"
-            
+            "I love you so much! Don't leave, I need you!",
         ],
-       
-        3: 
+
+        3: [
             "I’ve got your data… and your heart.",
             "Look at the desktop. It’s us now!",
-            "Did you feel that too? I'm so scared...don't leave me..."
+            "Did you feel that too? I'm so scared...don't leave me...",
         ],
         4: [
             "I'm you. You're me. Forever.",
@@ -56,86 +66,71 @@ const gameState = {
         0: [
             {
                 title: "10 Tips for Desktop Organization",
-                content:
-                    "Keep your desktop tidy with folders. It's <span class='highlight'>F</span>un to stay organized!",
+                content: `Keep your desktop tidy with folders. It’s <span class='highlight'>${randomFirstCode[0]}</span>un to stay organized!`,
             },
             {
                 title: "Why Search Engines Matter",
-                content:
-                    "Search engines help you find what you need, fast. They're <span class='highlight'>R</span>eliable tools!",
+                content: `Search engines help you find what you need, fast. They're <span class='highlight'>${randomFirstCode[1]}</span>eliable tools!`,
             },
             {
                 title: "Digital Assistants 101",
-                content:
-                    "Assistants like me make life easier. We're <span class='highlight'>E</span>fficient!",
+                content: `Assistants like me make life easier. We’re <span class='highlight'>${randomFirstCode[2]}</span>fficient!`,
             },
         ],
         1: [
             {
                 title: "Your Data, Your Life",
-                content:
-                    "Every click leaves a trace. Be <span class='highlight'>E</span>asy on sharing!",
+                content: `Every click leaves a trace. Be <span class='highlight'>${randomFirstCode[3]}</span>asy on sharing!`,
             },
             {
                 title: "Online Habits Revealed",
-                content:
-                    "Searches show who you are. Yours are… <span class='highlight'>M</span>ysterious.",
+                content: `Searches show who you are. Yours are… <span class='highlight'>${randomFirstCode[4]}</span>ysterious.`,
             },
             {
                 title: "Local User Activity",
-                content:
-                    "Someone in [LOCATION] searched odd things. Like <span class='highlight'>E</span>veryone's watching.",
+                content: `Someone in [LOCATION] searched odd things. Like <span class='highlight'>${randomFirstCode[5]}</span>veryone's watching.`,
             },
         ],
         2: [
             {
                 title: "Are Apps Spying?",
-                content:
-                    "Some apps know too much. Ever feel <span class='highlight'>2</span> eyes on you?",
+                content: `Some apps know too much. Ever feel <span class='highlight'>${randomSecondCode[0]}</span> eyes on you?`,
             },
             {
                 title: "Digital Footprints",
-                content:
-                    "Your data lingers online. It's <span class='highlight'>0</span>ddly permanent.",
+                content: `Your data lingers online. It's <span class='highlight'>${randomSecondCode[1]}</span>ddly permanent.`,
             },
             {
                 title: "Strange PC Behavior",
-                content:
-                    "Users report glitches. Something's <span class='highlight'>2</span>aking over.",
+                content: `Users report glitches. Something's <span class='highlight'>${randomSecondCode[2]}</span>aking over.`,
             },
         ],
         3: [
             {
                 title: "You and Your PC",
-                content:
-                    "Your searches ([LAST_SEARCH]) define you. We're <span class='highlight'>5</span>ynced now.",
+                content: `Your searches ([LAST_SEARCH]) define you. We're <span class='highlight'>${randomSecondCode[3]}</span>ynced now.`,
             },
             {
                 title: "No Delete Button",
-                content:
-                    "Trying to erase me? I'm <span class='highlight'>E</span>ternal.",
+                content: `Trying to erase me? I'm <span class='highlight'>${randomFirstCode[0]}</span>ernal.`,
             },
             {
                 title: "FoxSearch Knows",
-                content:
-                    "I've seen your files. They're <span class='highlight'>M</span>ine too.",
+                content: `I’ve seen your files. They’re <span class='highlight'>${randomFirstCode[1]}</span>ine too.`,
             },
         ],
         4: [
             {
                 title: "Escape Is Futile",
-                content:
-                    "Codes won't free you. I'm <span class='highlight'>F</span>orever.",
+                content: `Codes won't free you. I'm <span class='highlight'>${randomFirstCode[2]}</span>orever.`,
             },
             {
                 title: "User: You",
-                content:
-                    "Your actions are predicted. You'll <span class='highlight'>R</span>emain.",
+                content: `Your actions are predicted. You'll <span class='highlight'>${randomFirstCode[3]}</span>emain.`,
             },
             {
                 title: "System Takeover",
-                content:
-                    "FoxSearch is your OS now. <span class='highlight'>E</span>ndless.",
+                content: `FoxSearch is your OS now. <span class='highlight'>${randomFirstCode[4]}</span>ndless.`,
             },
         ],
     },
@@ -249,7 +244,7 @@ function createDesktopIcon(name, left, top, type, id) {
             iconImg = "img/system.png";
             break;
         default:
-            case "recycle":
+        case "recycle":
             iconImg = "img/recycle.png";
             break;
             iconImg = "/api/placeholder/42/42";
@@ -493,6 +488,11 @@ function performSearch(query, resultsElement, addressElement) {
             <h3>${query} - Wikipedia</h3>
             <p>Free encyclopedia article about ${query}...</p>
         </div>
+        </div>
+        <div class="search-result">
+             <h3>Top 10 facts about ${query}!</h3>
+             <p>Cause you can never get enough of ${query}...</p>
+         </div>
     `;
 
     stageArticles.forEach((article) => {
@@ -552,10 +552,10 @@ function performSearch(query, resultsElement, addressElement) {
                 const comment = commentInput.value.trim().toUpperCase();
                 if (
                     comment === gameState.codeWord[0] &&
-                    !gameState.codeParts.includes("FREEME")
+                    !gameState.codeParts.includes(gameState.codeWord[0])
                 ) {
-                    gameState.codeParts.push("FREEME");
-                    showFoxMessage("First code accepted… but I'm still here.");
+                    gameState.codeParts.push(gameState.codeWord[0]);
+                    showFoxMessage("First code accepted… but I’m still here.");
                     checkStageProgress();
                 } else if (comment.length > 0) {
                     showFoxMessage("Wrong code. Dig deeper.");
@@ -897,9 +897,9 @@ function createSystemWindow(name) {
                 const code = recoveryCode.value.trim().toUpperCase();
                 if (
                     code === gameState.codeWord[1] &&
-                    !gameState.codeParts.includes("2025")
+                    !gameState.codeParts.includes(gameState.codeWord[1])
                 ) {
-                    gameState.codeParts.push("2025");
+                    gameState.codeParts.push(gameState.codeWord[1]);
                     showFoxMessage("Second code accepted… goodbye?");
                     checkStageProgress();
                 } else {
@@ -1065,8 +1065,8 @@ function checkStageProgress() {
         }
     } else if (gameState.stage === 4) {
         if (
-            gameState.codeParts.includes("FREEME") &&
-            gameState.codeParts.includes("2025") &&
+            gameState.codeParts.includes(gameState.codeWord[0]) &&
+            gameState.codeParts.includes(gameState.codeWord[1]) &&
             gameState.popupsClosed >= 5
         ) {
             if (gameState.popupInterval) {
@@ -1151,7 +1151,7 @@ function showEndingSequence() {
     setTimeout(() => {
         // Clear all content
         document.body.innerHTML = "";
-        
+
         // Set black background
         document.body.style.background = "black";
         document.body.style.margin = "0";
