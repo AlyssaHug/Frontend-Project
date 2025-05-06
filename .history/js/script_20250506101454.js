@@ -1001,7 +1001,7 @@ function addCreepyFiles() {
         250,
         250,
         "text",
-        `creepy-${gameState.organizedFiles + 2}`
+        `creepy-${gameState.organizedFiles +  AMPK}
     );
 }
 
