@@ -39,7 +39,7 @@ const gameState = {
             
         ],
        
-        3: 
+        3: [
             "I’ve got your data… and your heart.",
             "Look at the desktop. It’s us now!",
             "Did you feel that too? I'm so scared...don't leave me..."
