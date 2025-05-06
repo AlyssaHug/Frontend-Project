@@ -1,5 +1,7 @@
+let currentAudio = null;
+// Game State
 const gameState = {
-    stage: 0, 
+    stage: 0, // 0: Introduction, 1: Suspicion, 2: Unease, 3: Obsession, 4: Collapse
     interactions: 0,
     searches: [],
     organizedFiles: 0,
@@ -7,10 +9,16 @@ const gameState = {
     popupsClosed: 0,
     codeLetters: [],
     codeParts: [],
-    codeWord: ["FREEME", "2025"], 
+    codeWord: ["FREEME", "2025"], // Split code for stage 4
     revealedCode: "",
     popupCount: 0,
     puzzleMatches: 0,
+    foxyAudio: [
+        "audio/foxy_speak1.mp3",
+        "audio/foxy_speak2.mp3",
+        "audio/foxy_speak3.mp3",
+        "audio/foxy_speak4.mp3"
+    ],
     foxMessages: {
         0: [
             "Hey there! I'm Foxy, your guide to tidying this digital mess!",
@@ -142,10 +150,8 @@ const desktop = document.getElementById("desktop");
 const foxElement = document.getElementById("fox");
 const foxSpeech = document.getElementById("fox-speech");
 
-// === START OF CHANGES ===
 // Reference to the Foxy image element
 const foxyImage = document.querySelector(".foxy");
-// === END OF CHANGES ===
 
 // Initialize desktop
 function initDesktop() {
@@ -865,21 +871,42 @@ function initFox() {
 }
 
 function showFoxMessage(message) {
-    // === START OF CHANGES ===
+    // Reference to the Foxy image element
+    const foxyImage = document.querySelector(".foxy");
+
     // Change Foxy image to open mouth
     foxyImage.src = "img/foxyopen.svg";
-    // === END OF CHANGES ===
 
+    // Display the message
     foxSpeech.textContent = message;
     foxSpeech.classList.remove("hidden");
 
-    // === START OF CHANGES ===
-    // Revert Foxy image to closed mouth after 5 seconds
+    // Stop any currently playing audio
+    if (currentAudio) {
+        currentAudio.pause();
+        currentAudio.currentTime = 0;
+    }
+
+    // Select a random audio file
+    const randomAudioFile = gameState.foxyAudio[Math.floor(Math.random() * gameState.foxyAudio.length)];
+
+    // Create new Audio instance
+    currentAudio = new Audio(randomAudioFile);
+
+    // Play the audio
+    currentAudio.play().catch((error) => {
+        console.error("Audio playback failed:", error);
+    });
+
+    // Revert Foxy image to closed mouth and stop audio after 5 seconds
     setTimeout(() => {
         foxSpeech.classList.add("hidden");
         foxyImage.src = "img/foxyclose.svg";
+        if (currentAudio) {
+            currentAudio.pause();
+            currentAudio.currentTime = 0;
+        }
     }, 5000);
-    // === END OF CHANGES ===
 }
 
 function showRandomFoxMessage() {
@@ -1059,9 +1086,7 @@ function showEndingSequence() {
     setTimeout(() => {
         foxSpeech.textContent = "We’re never apart.";
         foxSpeech.classList.remove("hidden");
-        // === START OF CHANGES ===
         foxyImage.src = "img/foxyopen.svg"; // Ensure open mouth during final message
-        // === END OF CHANGES ===
         foxElement.classList.add("glitch");
         desktop.classList.add("glitch");
     }, 2000);

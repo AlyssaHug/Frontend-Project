@@ -7,7 +7,7 @@ const gameState = {
     popupsClosed: 0,
     codeLetters: [],
     codeParts: [],
-    codeWord: ["FREEME", "2025"], 
+    codeWord: ["FREEME", "2025"], // Split code for stage 4
     revealedCode: "",
     popupCount: 0,
     puzzleMatches: 0,

@@ -1,5 +1,5 @@
 const gameState = {
-    stage: 0, 
+    stage: 0, // 0: Introduction, 1: Suspicion, 2: Unease, 3: Obsession, 4: Collapse
     interactions: 0,
     searches: [],
     organizedFiles: 0,
@@ -7,7 +7,7 @@ const gameState = {
     popupsClosed: 0,
     codeLetters: [],
     codeParts: [],
-    codeWord: ["FREEME", "2025"], 
+    codeWord: ["FREEME", "2025"], // Split code for stage 4
     revealedCode: "",
     popupCount: 0,
     puzzleMatches: 0,
