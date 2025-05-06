@@ -174,7 +174,7 @@ function initDesktop() {
             name: "Recycle Bin",
             left: 20,
             top: 120,
-            type: "system",
+            type: "recycle",
             id: "recycle-bin",
         },
         { name: "My Computer", left: 20, top: 220, type: "system" },
@@ -242,6 +242,9 @@ function createDesktopIcon(name, left, top, type, id) {
             iconImg = "img/system.png";
             break;
         default:
+            case "recycle":
+            iconImg = "img/recycle.png";
+            break;
             iconImg = "/api/placeholder/42/42";
     }
 
