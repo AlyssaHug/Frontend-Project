@@ -145,6 +145,11 @@ const desktop = document.getElementById("desktop");
 const foxElement = document.getElementById("fox");
 const foxSpeech = document.getElementById("fox-speech");
 
+// === START OF CHANGES ===
+// Reference to the Foxy image element
+const foxyImage = document.querySelector(".foxy");
+// === END OF CHANGES ===
+
 // Initialize desktop
 function initDesktop() {
     const icons = [
@@ -863,11 +868,21 @@ function initFox() {
 }
 
 function showFoxMessage(message) {
+    // === START OF CHANGES ===
+    // Change Foxy image to open mouth
+    foxyImage.src = "img/foxyopen.svg";
+    // === END OF CHANGES ===
+
     foxSpeech.textContent = message;
     foxSpeech.classList.remove("hidden");
+
+    // === START OF CHANGES ===
+    // Revert Foxy image to closed mouth after 5 seconds
     setTimeout(() => {
         foxSpeech.classList.add("hidden");
+        foxyImage.src = "img/foxyclose.svg";
     }, 5000);
+    // === END OF CHANGES ===
 }
 
 function showRandomFoxMessage() {
@@ -1047,6 +1062,9 @@ function showEndingSequence() {
     setTimeout(() => {
         foxSpeech.textContent = "We’re never apart.";
         foxSpeech.classList.remove("hidden");
+        // === START OF CHANGES ===
+        foxyImage.src = "img/foxyopen.svg"; // Ensure open mouth during final message
+        // === END OF CHANGES ===
         foxElement.classList.add("glitch");
         desktop.classList.add("glitch");
     }, 2000);
