@@ -11,7 +11,6 @@ body {
     background-repeat: no-repeat;
     background-position: center;
     user-select: none;
-    overflow: hidden;
 }
 
 #desktop {
@@ -19,7 +18,6 @@ body {
     height: 100vh;
     position: relative;
     cursor: default;
-    overflow: hidden;
 }
 
 .taskbar {
@@ -525,8 +523,4 @@ body {
     position: absolute;
     bottom: -7em;
     right: -5em;
-}
-.highlight {
-    color: red;
-    font-weight: bold;
 }

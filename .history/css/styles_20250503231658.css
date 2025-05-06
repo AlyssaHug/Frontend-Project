@@ -11,15 +11,20 @@ body {
     background-repeat: no-repeat;
     background-position: center;
     user-select: none;
-    overflow: hidden;
 }
 
 #desktop {
-    width: 100vw;
-    height: 100vh;
-    position: relative;
-    cursor: default;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 32px;
+    background-color: #008080;
+    background-image: url("img/wallpaper.jpg");
+    background-size: cover;
+    background-position: center;
     overflow: hidden;
+    z-index: 1;
 }
 
 .taskbar {
@@ -525,8 +530,4 @@ body {
     position: absolute;
     bottom: -7em;
     right: -5em;
-}
-.highlight {
-    color: red;
-    font-weight: bold;
 }

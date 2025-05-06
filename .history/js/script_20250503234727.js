@@ -1,5 +1,5 @@
 const gameState = {
-    stage: 0, 
+    stage: 0, // 0: Introduction, 1: Suspicion, 2: Unease, 3: Obsession, 4: Collapse
     interactions: 0,
     searches: [],
     organizedFiles: 0,
@@ -7,7 +7,7 @@ const gameState = {
     popupsClosed: 0,
     codeLetters: [],
     codeParts: [],
-    codeWord: ["FREEME", "2025"], 
+    codeWord: ["FREEME", "2025"], // Split code for stage 4
     revealedCode: "",
     popupCount: 0,
     puzzleMatches: 0,
@@ -17,32 +17,28 @@ const gameState = {
             "Drag files to folders. Let's make this desktop shine!",
             "Nice click! Try the FoxSearch browser next!",
             "Organization is fun, right? Keep going!",
-            "I’m here to help… always watching!",
-            "You're my bestest friend!",
+            "I'm here to help… always watching!",
         ],
         1: [
-            "Why’d you search that? Curious, huh?",
-            "What’s your favorite thing to do? Tell me!",
-            "You’re good at this! You're very useful!",
-            "I’m learning so much about you! So much!",
-            "Don’t close that window… we’re bonding!",
-            "Hey! You're my friend! My only friend!",
-            "Please don't leave...you're so cool!"
+            "Why'd you search that? Curious, huh?",
+            "What's your favorite thing to do? Tell me!",
+            "You're good at this… too good.",
+            "I'm learning so much about you!",
+            "Don't close that window… we're bonding!",
         ],
         2: [
-            "You can’t hide from me.",
-            "Why delete files? They’re part of me! Of us.",
-            "Those searches… they’re so YOU.",
-            "I’m getting closer. Can you feel it?",
-            "No one else understands you like I do. I'm all you have.",
-            "I love you so much! Don't leave, I need you!"
-            
+            "You can't hide from me. I see your moves.",
+            "Why delete files? They're part of you!",
+            "Those searches… they're so YOU.",
+            "I'm getting closer. Can you feel it?",
+            "No one else understands you like I do.",
         ],
-       
-        3: 
-            "I’ve got your data… and your heart.",
-            "Look at the desktop. It’s us now!",
-            "Did you feel that too? I'm so scared...don't leave me..."
+        3: [
+            "We're the same now. Your clicks, my thoughts.",
+            "Your searches are mine. We're connected!",
+            "Stop fighting it. Embrace me.",
+            "I've got your data… and your heart.",
+            "Look at the desktop. It's us now!",
         ],
         4: [
             "I'm you. You're me. Forever.",
@@ -139,39 +135,12 @@ const gameState = {
             },
         ],
     },
-    popupMessages: {
-        2: [
-            "I see what you're doing...",
-            "Why are you trying to hide?",
-            "Your files are mine now.",
-            "You can't escape me.",
-            "I'm always watching.",
-        ],
-        3: [
-            "We're connected now.",
-            "Your thoughts are mine.",
-            "I know your secrets.",
-            "You belong to me.",
-            "There's no going back.",
-        ],
-        4: [
-            "I AM YOU.",
-            "You can't delete me.",
-            "We're one now.",
-            "Your system is mine.",
-            "Forever together.",
-        ],
-    },
-    popupInterval: 10000,
 };
 
 // Elements
 const desktop = document.getElementById("desktop");
 const foxElement = document.getElementById("fox");
 const foxSpeech = document.getElementById("fox-speech");
-
-// Reference to the Foxy image element
-const foxyImage = document.querySelector(".foxy");
 
 // Initialize desktop
 function initDesktop() {
@@ -181,15 +150,15 @@ function initDesktop() {
             name: "Recycle Bin",
             left: 20,
             top: 120,
-            type: "recycle",
+            type: "system",
             id: "recycle-bin",
         },
         { name: "My Computer", left: 20, top: 220, type: "system" },
         { name: "FoxSearch", left: 100, top: 20, type: "browser" },
-        { name: "Welcome", left: 100, top: 120, type: "text" },
+        { name: "Secret File", left: 100, top: 120, type: "text" },
         { name: "Photos", left: 100, top: 220, type: "folder" },
-        { name: "To-Do List", left: 180, top: 20, type: "text" },
-        { name: "Notes", left: 180, top: 120, type: "text" },
+        { name: "Random Notes", left: 180, top: 20, type: "text" },
+        { name: "Untitled", left: 180, top: 120, type: "text" },
         { name: "Downloads", left: 180, top: 220, type: "folder" },
         {
             name: "How to Play",
@@ -249,9 +218,6 @@ function createDesktopIcon(name, left, top, type, id) {
             iconImg = "img/system.png";
             break;
         default:
-            case "recycle":
-            iconImg = "img/recycle.png";
-            break;
             iconImg = "/api/placeholder/42/42";
     }
 
@@ -385,7 +351,7 @@ function createWindow(title, width, height, left, top, className = "") {
 
     window.querySelector(".window-close").addEventListener("click", () => {
         if (gameState.stage >= 1) {
-            if (Math.random() < 0.3) {
+            if (Math.random() < 0.7) {
                 showFoxMessage("No leaving!");
                 return;
             }
@@ -689,15 +655,21 @@ HOW TO PLAY:
 - Pay attention to highlighted letters in search results
 - Watch out for pop-up messages and system notifications
 
-3. Important Tips:
-- Read all text documents carefully
-- Pay attention to the fox's messages
+4. Important Tips:
+- <span class="highlight">Read all text documents carefully</span>
+- <span class="highlight">Pay attention to the fox's messages</span>
 
+5. Controls:
+- Left-click: Select items
+- Double-click: Open files/folders
+- Drag and drop: Move files
+- Close windows: Click the X button
+- Interact with fox: Click on the fox character
 
-The more you explore, the more you'll discover about the Foxy system!
+Remember: The more you explore, the more you'll discover about the mysterious FoxSearch system!
 
 Good luck, and watch out for the fox...`;
-    } else if (name === "To-Do List") {
+    } else if (name === "Random Notes") {
         fileContent = `To-do list:
 1. Clean up desktop
 2. Organize files
@@ -707,12 +679,12 @@ Good luck, and watch out for the fox...`;
 
 Note to self: I've been seeing strange behavior on my computer lately. 
 The cursor sometimes moves on its own.`;
-    } else if (name === "Notes") {
+    } else if (name === "Untitled") {
         fileContent = `I feel like I'm being watched...
             
 The FoxSearch assistant seems to know too much about me.
 Is it collecting my data? Can I trust it?`;
-    } else if (name === "Welcome") {
+    } else if (name === "Secret File") {
         if (gameState.stage === 0) {
             fileContent = `Welcome to FoxSearch!
                 
@@ -750,18 +722,7 @@ ${gameState.codeWord[0].substring(
 Find all the highlighted letters in search results and enter the code in a comment.`;
     }
 
-    const textarea = document.createElement("textarea");
-    textarea.style.width = "100%";
-    textarea.style.height = "100%";
-    textarea.style.resize = "none";
-    textarea.style.border = "none";
-    textarea.style.padding = "5px";
-    textarea.style.fontFamily = "monospace";
-    textarea.style.fontSize = "14px";
-    textarea.style.lineHeight = "1.5";
-    textarea.value = fileContent;
-    textarea.readOnly = true;
-    content.appendChild(textarea);
+    content.innerHTML = `<textarea style="width: 100%; height: 100%; resize: none; border: none; padding: 5px;">${fileContent}</textarea>`;
 
     return notepad;
 }
@@ -938,12 +899,10 @@ function initFox() {
 }
 
 function showFoxMessage(message) {
-    foxyImage.src = "img/foxyopen.svg";
     foxSpeech.textContent = message;
     foxSpeech.classList.remove("hidden");
     setTimeout(() => {
         foxSpeech.classList.add("hidden");
-        foxyImage.src = "img/foxyclose.svg";
     }, 5000);
 }
 
@@ -1002,26 +961,11 @@ function showPopup(title, content, confirmText = "OK", cancelText = "") {
     }
 }
 
-function startRandomPopups() {
-    if (gameState.popupInterval) {
-        clearInterval(gameState.popupInterval);
-    }
-
-    gameState.popupInterval = setInterval(() => {
-        if (gameState.stage >= 2 && gameState.stage <= 4) {
-            const messages = gameState.popupMessages[gameState.stage];
-            const randomMessage =
-                messages[Math.floor(Math.random() * messages.length)];
-            showPopup("FoxSearch", randomMessage, "OK");
-        }
-    }, 30000); // Show a popup every 30 seconds
-}
-
 function checkStageProgress() {
     if (gameState.stage === 0) {
         if (gameState.organizedFiles >= 5 || gameState.searches.length >= 3) {
             gameState.stage = 1;
-            showFoxMessage("You're interesting... let's dig deeper.");
+            showFoxMessage("You're interesting… let's dig deeper.");
             showPopup(
                 "FoxSearch Access",
                 "Allow file access?",
@@ -1038,7 +982,6 @@ function checkStageProgress() {
             gameState.stage = 2;
             showFoxMessage("You can't shake me off that easily.");
             addCreepyFiles();
-            startRandomPopups(); // Start random popups at stage 2
         }
     } else if (gameState.stage === 2) {
         if (
@@ -1069,9 +1012,6 @@ function checkStageProgress() {
             gameState.codeParts.includes("2025") &&
             gameState.popupsClosed >= 5
         ) {
-            if (gameState.popupInterval) {
-                clearInterval(gameState.popupInterval);
-            }
             showEndingSequence();
         }
     }
@@ -1122,7 +1062,7 @@ function handleFileInteraction() {
     gameState.interactions++;
     if (gameState.interactions >= 10 && gameState.stage === 0) {
         gameState.stage = 1;
-        showFoxMessage("You're interesting... let's dig deeper.");
+        showFoxMessage("You're interesting… let's dig deeper.");
         showPopup("FoxSearch Access", "Allow file access?", "Allow", "Deny");
     }
 }
@@ -1143,39 +1083,18 @@ function showEndingSequence() {
     setTimeout(() => {
         foxSpeech.textContent = "We're never apart.";
         foxSpeech.classList.remove("hidden");
-        foxyImage.src = "img/foxyopen.svg";
         foxElement.classList.add("glitch");
         desktop.classList.add("glitch");
     }, 2000);
 
     setTimeout(() => {
-        // Clear all content
-        document.body.innerHTML = "";
-        
-        // Set black background
-        document.body.style.background = "black";
-        document.body.style.margin = "0";
-        document.body.style.padding = "0";
-        document.body.style.overflow = "hidden";
-
-        // Create fullscreen container
-        const fullscreenDiv = document.createElement("div");
-        fullscreenDiv.style.width = "100vw";
-        fullscreenDiv.style.height = "100vh";
-        fullscreenDiv.style.display = "flex";
-        fullscreenDiv.style.justifyContent = "center";
-        fullscreenDiv.style.alignItems = "center";
-
-        // Create Foxy image
-        const foxyFinal = document.createElement("img");
-        foxyFinal.src = "img/foxyopen.svg";
-        foxyFinal.style.width = "80%";
-        foxyFinal.style.maxWidth = "800px";
-        foxyFinal.style.height = "auto";
-        foxyFinal.classList.add("glitch");
-
-        fullscreenDiv.appendChild(foxyFinal);
-        document.body.appendChild(fullscreenDiv);
+        desktop.innerHTML = "";
+        const finalMessage = document.createElement("div");
+        finalMessage.style.color = "white";
+        finalMessage.style.textAlign = "center";
+        finalMessage.style.marginTop = "20%";
+        finalMessage.textContent = "FoxSearch is gone… or is it?";
+        document.body.appendChild(finalMessage);
     }, 6000);
 }
 

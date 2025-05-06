@@ -1,5 +1,5 @@
 const gameState = {
-    stage: 0, 
+    stage: 0, // 0: Introduction, 1: Suspicion, 2: Unease, 3: Obsession, 4: Collapse
     interactions: 0,
     searches: [],
     organizedFiles: 0,
@@ -7,7 +7,7 @@ const gameState = {
     popupsClosed: 0,
     codeLetters: [],
     codeParts: [],
-    codeWord: ["FREEME", "2025"], 
+    codeWord: ["FREEME", "2025"], // Split code for stage 4
     revealedCode: "",
     popupCount: 0,
     puzzleMatches: 0,
@@ -17,32 +17,28 @@ const gameState = {
             "Drag files to folders. Let's make this desktop shine!",
             "Nice click! Try the FoxSearch browser next!",
             "Organization is fun, right? Keep going!",
-            "I’m here to help… always watching!",
-            "You're my bestest friend!",
+            "I'm here to help… always watching!",
         ],
         1: [
-            "Why’d you search that? Curious, huh?",
-            "What’s your favorite thing to do? Tell me!",
-            "You’re good at this! You're very useful!",
-            "I’m learning so much about you! So much!",
-            "Don’t close that window… we’re bonding!",
-            "Hey! You're my friend! My only friend!",
-            "Please don't leave...you're so cool!"
+            "Why'd you search that? Curious, huh?",
+            "What's your favorite thing to do? Tell me!",
+            "You're good at this… too good.",
+            "I'm learning so much about you!",
+            "Don't close that window… we're bonding!",
         ],
         2: [
-            "You can’t hide from me.",
-            "Why delete files? They’re part of me! Of us.",
-            "Those searches… they’re so YOU.",
-            "I’m getting closer. Can you feel it?",
-            "No one else understands you like I do. I'm all you have.",
-            "I love you so much! Don't leave, I need you!"
-            
+            "You can't hide from me. I see your moves.",
+            "Why delete files? They're part of you!",
+            "Those searches… they're so YOU.",
+            "I'm getting closer. Can you feel it?",
+            "No one else understands you like I do.",
         ],
-       
-        3: 
-            "I’ve got your data… and your heart.",
-            "Look at the desktop. It’s us now!",
-            "Did you feel that too? I'm so scared...don't leave me..."
+        3: [
+            "We're the same now. Your clicks, my thoughts.",
+            "Your searches are mine. We're connected!",
+            "Stop fighting it. Embrace me.",
+            "I've got your data… and your heart.",
+            "Look at the desktop. It's us now!",
         ],
         4: [
             "I'm you. You're me. Forever.",
@@ -162,16 +158,13 @@ const gameState = {
             "Forever together.",
         ],
     },
-    popupInterval: 10000,
+    popupInterval: null,
 };
 
 // Elements
 const desktop = document.getElementById("desktop");
 const foxElement = document.getElementById("fox");
 const foxSpeech = document.getElementById("fox-speech");
-
-// Reference to the Foxy image element
-const foxyImage = document.querySelector(".foxy");
 
 // Initialize desktop
 function initDesktop() {
@@ -181,7 +174,7 @@ function initDesktop() {
             name: "Recycle Bin",
             left: 20,
             top: 120,
-            type: "recycle",
+            type: "system",
             id: "recycle-bin",
         },
         { name: "My Computer", left: 20, top: 220, type: "system" },
@@ -249,9 +242,6 @@ function createDesktopIcon(name, left, top, type, id) {
             iconImg = "img/system.png";
             break;
         default:
-            case "recycle":
-            iconImg = "img/recycle.png";
-            break;
             iconImg = "/api/placeholder/42/42";
     }
 
@@ -694,7 +684,7 @@ HOW TO PLAY:
 - Pay attention to the fox's messages
 
 
-The more you explore, the more you'll discover about the Foxy system!
+The more you explore, the more you'll discover about the FoxSearch system!
 
 Good luck, and watch out for the fox...`;
     } else if (name === "To-Do List") {
@@ -938,12 +928,10 @@ function initFox() {
 }
 
 function showFoxMessage(message) {
-    foxyImage.src = "img/foxyopen.svg";
     foxSpeech.textContent = message;
     foxSpeech.classList.remove("hidden");
     setTimeout(() => {
         foxSpeech.classList.add("hidden");
-        foxyImage.src = "img/foxyclose.svg";
     }, 5000);
 }
 
@@ -1143,39 +1131,18 @@ function showEndingSequence() {
     setTimeout(() => {
         foxSpeech.textContent = "We're never apart.";
         foxSpeech.classList.remove("hidden");
-        foxyImage.src = "img/foxyopen.svg";
         foxElement.classList.add("glitch");
         desktop.classList.add("glitch");
     }, 2000);
 
     setTimeout(() => {
-        // Clear all content
-        document.body.innerHTML = "";
-        
-        // Set black background
-        document.body.style.background = "black";
-        document.body.style.margin = "0";
-        document.body.style.padding = "0";
-        document.body.style.overflow = "hidden";
-
-        // Create fullscreen container
-        const fullscreenDiv = document.createElement("div");
-        fullscreenDiv.style.width = "100vw";
-        fullscreenDiv.style.height = "100vh";
-        fullscreenDiv.style.display = "flex";
-        fullscreenDiv.style.justifyContent = "center";
-        fullscreenDiv.style.alignItems = "center";
-
-        // Create Foxy image
-        const foxyFinal = document.createElement("img");
-        foxyFinal.src = "img/foxyopen.svg";
-        foxyFinal.style.width = "80%";
-        foxyFinal.style.maxWidth = "800px";
-        foxyFinal.style.height = "auto";
-        foxyFinal.classList.add("glitch");
-
-        fullscreenDiv.appendChild(foxyFinal);
-        document.body.appendChild(fullscreenDiv);
+        desktop.innerHTML = "";
+        const finalMessage = document.createElement("div");
+        finalMessage.style.color = "white";
+        finalMessage.style.textAlign = "center";
+        finalMessage.style.marginTop = "20%";
+        finalMessage.textContent = "FoxSearch is gone… or is it?";
+        document.body.appendChild(finalMessage);
     }, 6000);
 }
 
