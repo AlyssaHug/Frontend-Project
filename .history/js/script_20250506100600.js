@@ -35,7 +35,6 @@ const gameState = {
             "Those searches… they’re so YOU.",
             "I’m getting closer. Can you feel it?",
             "No one else understands you like I do. I'm all you have.",
-            "I love you so much! Don't leave, I need you!"
         ],
         3: [
             "We’re the same now. Your clicks, my thoughts.",

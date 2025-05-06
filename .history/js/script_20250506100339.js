@@ -18,7 +18,7 @@ const gameState = {
             "Nice click! Try the FoxSearch browser next!",
             "Organization is fun, right? Keep going!",
             "I’m here to help… always watching!",
-            "You're my bestest friend!",
+            "Don't do anything you'll regret! Some things can't be undone!",
         ],
         1: [
             "Why’d you search that? Curious, huh?",
@@ -26,16 +26,14 @@ const gameState = {
             "You’re good at this! You're very useful!",
             "I’m learning so much about you! So much!",
             "Don’t close that window… we’re bonding!",
-            "Hey! You're my friend! My only friend!",
-            "Please don't leave...you're so cool!"
+            "Hey! You're my friend! My only friend!"
         ],
         2: [
-            "You can’t hide from me.",
-            "Why delete files? They’re part of me! Of us.",
+            "You can’t hide from me. .",
+            "Why delete files? They’re part of you!",
             "Those searches… they’re so YOU.",
             "I’m getting closer. Can you feel it?",
-            "No one else understands you like I do. I'm all you have.",
-            "I love you so much! Don't leave, I need you!"
+            "No one else understands you like I do.",
         ],
         3: [
             "We’re the same now. Your clicks, my thoughts.",
@@ -43,7 +41,6 @@ const gameState = {
             "Stop fighting it. Embrace me.",
             "I’ve got your data… and your heart.",
             "Look at the desktop. It’s us now!",
-            "Did you feel that too? I'm so scared...don't leave me..."
         ],
         4: [
             "I’m you. You’re me. Forever.",
