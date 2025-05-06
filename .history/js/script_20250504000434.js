@@ -158,7 +158,7 @@ const gameState = {
             "Forever together.",
         ],
     },
-    popupInterval: 10000,
+    popupInterval: null,
 };
 
 // Elements
@@ -684,10 +684,10 @@ HOW TO PLAY:
 - Pay attention to the fox's messages
 
 
-The more you explore, the more you'll discover about the Foxy system!
+The more you explore, the more you'll discover about the FoxSearch system!
 
 Good luck, and watch out for the fox...`;
-    } else if (name === "To-Do List") {
+    } else if (name === "Random Notes") {
         fileContent = `To-do list:
 1. Clean up desktop
 2. Organize files
@@ -697,12 +697,12 @@ Good luck, and watch out for the fox...`;
 
 Note to self: I've been seeing strange behavior on my computer lately. 
 The cursor sometimes moves on its own.`;
-    } else if (name === "Notes") {
+    } else if (name === "Untitled") {
         fileContent = `I feel like I'm being watched...
             
 The FoxSearch assistant seems to know too much about me.
 Is it collecting my data? Can I trust it?`;
-    } else if (name === "Welcome") {
+    } else if (name === "Secret File") {
         if (gameState.stage === 0) {
             fileContent = `Welcome to FoxSearch!
                 
@@ -781,6 +781,17 @@ function createSystemWindow(name) {
                     <div class="log-entry">Last Login: Today</div>
                     <div class="log-entry">Monitoring Service: ${
                         gameState.stage >= 1 ? "ACTIVE" : "Inactive"
+                    }</div>
+                    <div class="log-entry">Current Stage: ${
+                        gameState.stage === 0
+                            ? "Introduction"
+                            : gameState.stage === 1
+                            ? "Suspicion"
+                            : gameState.stage === 2
+                            ? "Unease"
+                            : gameState.stage === 3
+                            ? "Obsession"
+                            : "Collapse"
                     }</div>
                 </div>
             </div>

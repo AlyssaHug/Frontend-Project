@@ -158,7 +158,7 @@ const gameState = {
             "Forever together.",
         ],
     },
-    popupInterval: 10000,
+    popupInterval: null,
 };
 
 // Elements
