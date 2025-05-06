@@ -11,15 +11,13 @@ body {
     background-repeat: no-repeat;
     background-position: center;
     user-select: none;
-    overflow: hidden;
 }
 
 #desktop {
-    width: 100vw;
-    height: 100vh;
+    width: 100%;
+    height: 100v5;
     position: relative;
     cursor: default;
-    overflow: hidden;
 }
 
 .taskbar {
