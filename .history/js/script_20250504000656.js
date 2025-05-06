@@ -158,7 +158,7 @@ const gameState = {
             "Forever together.",
         ],
     },
-    popupInterval: 10000,
+    popupInterval: null,
 };
 
 // Elements
@@ -661,7 +661,11 @@ function createNotepadWindow(name) {
 
     let fileContent = "";
 
-    if (name === "How to Play") {
+    // Get the original name from the icon's ID
+    const icon = document.querySelector(`[id^="icon-"] .file-label`);
+    const originalName = icon ? icon.textContent : name;
+
+    if (originalName === "How to Play") {
         fileContent = `Welcome to FoxSearch - A Desktop Adventure
 
 HOW TO PLAY:
@@ -684,10 +688,13 @@ HOW TO PLAY:
 - Pay attention to the fox's messages
 
 
-The more you explore, the more you'll discover about the Foxy system!
+The more you explore, the more you'll discover about the FoxSearch system!
 
 Good luck, and watch out for the fox...`;
-    } else if (name === "To-Do List") {
+    } else if (
+        originalName === "Random Notes" ||
+        originalName === "To-Do List"
+    ) {
         fileContent = `To-do list:
 1. Clean up desktop
 2. Organize files
@@ -697,12 +704,12 @@ Good luck, and watch out for the fox...`;
 
 Note to self: I've been seeing strange behavior on my computer lately. 
 The cursor sometimes moves on its own.`;
-    } else if (name === "Notes") {
+    } else if (originalName === "Untitled" || originalName === "Notes") {
         fileContent = `I feel like I'm being watched...
             
 The FoxSearch assistant seems to know too much about me.
 Is it collecting my data? Can I trust it?`;
-    } else if (name === "Welcome") {
+    } else if (originalName === "Secret File" || originalName === "Welcome") {
         if (gameState.stage === 0) {
             fileContent = `Welcome to FoxSearch!
                 
@@ -781,6 +788,17 @@ function createSystemWindow(name) {
                     <div class="log-entry">Last Login: Today</div>
                     <div class="log-entry">Monitoring Service: ${
                         gameState.stage >= 1 ? "ACTIVE" : "Inactive"
+                    }</div>
+                    <div class="log-entry">Current Stage: ${
+                        gameState.stage === 0
+                            ? "Introduction"
+                            : gameState.stage === 1
+                            ? "Suspicion"
+                            : gameState.stage === 2
+                            ? "Unease"
+                            : gameState.stage === 3
+                            ? "Obsession"
+                            : "Collapse"
                     }</div>
                 </div>
             </div>

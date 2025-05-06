@@ -158,7 +158,7 @@ const gameState = {
             "Forever together.",
         ],
     },
-    popupInterval: 10000,
+    popupInterval: null,
 };
 
 // Elements
@@ -684,7 +684,7 @@ HOW TO PLAY:
 - Pay attention to the fox's messages
 
 
-The more you explore, the more you'll discover about the Foxy system!
+The more you explore, the more you'll discover about the FoxSearch system!
 
 Good luck, and watch out for the fox...`;
     } else if (name === "To-Do List") {

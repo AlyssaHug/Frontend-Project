@@ -135,30 +135,6 @@ const gameState = {
             },
         ],
     },
-    popupMessages: {
-        2: [
-            "I see what you're doing...",
-            "Why are you trying to hide?",
-            "Your files are mine now.",
-            "You can't escape me.",
-            "I'm always watching.",
-        ],
-        3: [
-            "We're connected now.",
-            "Your thoughts are mine.",
-            "I know your secrets.",
-            "You belong to me.",
-            "There's no going back.",
-        ],
-        4: [
-            "I AM YOU.",
-            "You can't delete me.",
-            "We're one now.",
-            "Your system is mine.",
-            "Forever together.",
-        ],
-    },
-    popupInterval: 10000,
 };
 
 // Elements
@@ -179,10 +155,10 @@ function initDesktop() {
         },
         { name: "My Computer", left: 20, top: 220, type: "system" },
         { name: "FoxSearch", left: 100, top: 20, type: "browser" },
-        { name: "Welcome", left: 100, top: 120, type: "text" },
+        { name: "Secret File", left: 100, top: 120, type: "text" },
         { name: "Photos", left: 100, top: 220, type: "folder" },
-        { name: "To-Do List", left: 180, top: 20, type: "text" },
-        { name: "Notes", left: 180, top: 120, type: "text" },
+        { name: "Random Notes", left: 180, top: 20, type: "text" },
+        { name: "Untitled", left: 180, top: 120, type: "text" },
         { name: "Downloads", left: 180, top: 220, type: "folder" },
         {
             name: "How to Play",
@@ -375,7 +351,7 @@ function createWindow(title, width, height, left, top, className = "") {
 
     window.querySelector(".window-close").addEventListener("click", () => {
         if (gameState.stage >= 1) {
-            if (Math.random() < 0.3) {
+            if (Math.random() < 0.7) {
                 showFoxMessage("No leaving!");
                 return;
             }
@@ -684,10 +660,10 @@ HOW TO PLAY:
 - Pay attention to the fox's messages
 
 
-The more you explore, the more you'll discover about the Foxy system!
+The more you explore, the more you'll discover about the FoxSearch system!
 
 Good luck, and watch out for the fox...`;
-    } else if (name === "To-Do List") {
+    } else if (name === "Random Notes") {
         fileContent = `To-do list:
 1. Clean up desktop
 2. Organize files
@@ -697,12 +673,12 @@ Good luck, and watch out for the fox...`;
 
 Note to self: I've been seeing strange behavior on my computer lately. 
 The cursor sometimes moves on its own.`;
-    } else if (name === "Notes") {
+    } else if (name === "Untitled") {
         fileContent = `I feel like I'm being watched...
             
 The FoxSearch assistant seems to know too much about me.
 Is it collecting my data? Can I trust it?`;
-    } else if (name === "Welcome") {
+    } else if (name === "Secret File") {
         if (gameState.stage === 0) {
             fileContent = `Welcome to FoxSearch!
                 
@@ -990,26 +966,11 @@ function showPopup(title, content, confirmText = "OK", cancelText = "") {
     }
 }
 
-function startRandomPopups() {
-    if (gameState.popupInterval) {
-        clearInterval(gameState.popupInterval);
-    }
-
-    gameState.popupInterval = setInterval(() => {
-        if (gameState.stage >= 2 && gameState.stage <= 4) {
-            const messages = gameState.popupMessages[gameState.stage];
-            const randomMessage =
-                messages[Math.floor(Math.random() * messages.length)];
-            showPopup("FoxSearch", randomMessage, "OK");
-        }
-    }, 30000); // Show a popup every 30 seconds
-}
-
 function checkStageProgress() {
     if (gameState.stage === 0) {
         if (gameState.organizedFiles >= 5 || gameState.searches.length >= 3) {
             gameState.stage = 1;
-            showFoxMessage("You're interesting... let's dig deeper.");
+            showFoxMessage("You're interesting… let's dig deeper.");
             showPopup(
                 "FoxSearch Access",
                 "Allow file access?",
@@ -1026,7 +987,6 @@ function checkStageProgress() {
             gameState.stage = 2;
             showFoxMessage("You can't shake me off that easily.");
             addCreepyFiles();
-            startRandomPopups(); // Start random popups at stage 2
         }
     } else if (gameState.stage === 2) {
         if (
@@ -1057,9 +1017,6 @@ function checkStageProgress() {
             gameState.codeParts.includes("2025") &&
             gameState.popupsClosed >= 5
         ) {
-            if (gameState.popupInterval) {
-                clearInterval(gameState.popupInterval);
-            }
             showEndingSequence();
         }
     }
@@ -1110,7 +1067,7 @@ function handleFileInteraction() {
     gameState.interactions++;
     if (gameState.interactions >= 10 && gameState.stage === 0) {
         gameState.stage = 1;
-        showFoxMessage("You're interesting... let's dig deeper.");
+        showFoxMessage("You're interesting… let's dig deeper.");
         showPopup("FoxSearch Access", "Allow file access?", "Allow", "Deny");
     }
 }
