@@ -18,6 +18,7 @@ const gameState = {
     popupsClosed: 0,
     codeLetters: [],
     codeParts: [],
+    searches: [],
     codeWord: [randomFirstCode, randomSecondCode], // Randomized codes
     revealedCode: "",
     popupCount: 0,
