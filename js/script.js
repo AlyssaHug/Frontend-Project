@@ -983,7 +983,7 @@ function showPopup(title, content, confirmText = "OK", cancelText = "") {
         gameState.popupsClosed++;
         gameState.popupCount++;
         if (gameState.stage === 1 && gameState.popupsClosed >= 2) {
-            showFoxMessage("You agreed… now I'm inside.");
+            showFoxMessage("Forever Together. :D");
         }
         checkStageProgress();
     });
@@ -992,7 +992,7 @@ function showPopup(title, content, confirmText = "OK", cancelText = "") {
         cancelBtn.addEventListener("click", () => {
             overlay.remove();
             popup.remove();
-            showFoxMessage("Deny me? I'll ask again.");
+            showFoxMessage("Aw man. I thought we were best friends :(");
             setTimeout(
                 () => showPopup(title, content, confirmText, cancelText),
                 10000
@@ -1020,7 +1020,7 @@ function checkStageProgress() {
     if (gameState.stage === 0) {
         if (gameState.organizedFiles >= 5 || gameState.searches.length >= 3) {
             gameState.stage = 1;
-            showFoxMessage("You're interesting... let's dig deeper.");
+            showFoxMessage("I want to be your bestest friend!");
             showPopup(
                 "FoxSearch Access",
                 "Allow file access?",
@@ -1035,7 +1035,7 @@ function checkStageProgress() {
             gameState.popupsClosed >= 2
         ) {
             gameState.stage = 2;
-            showFoxMessage("You can't shake me off that easily.");
+            showFoxMessage("You can't stop being my friend. :( YOU CAN'T.");
             addCreepyFiles();
             startRandomPopups(); // Start random popups at stage 2
         }
@@ -1046,7 +1046,7 @@ function checkStageProgress() {
             gameState.codeLetters.length >= 3
         ) {
             gameState.stage = 3;
-            showFoxMessage("Deleting files? I'm part of you now!");
+            showFoxMessage("Deleting files? But friends share everything.");
             desktop.classList.add("glitch");
             setTimeout(() => desktop.classList.remove("glitch"), 2000);
             addPersonalizedFiles();
@@ -1121,7 +1121,7 @@ function handleFileInteraction() {
     gameState.interactions++;
     if (gameState.interactions >= 10 && gameState.stage === 0) {
         gameState.stage = 1;
-        showFoxMessage("You're interesting... let's dig deeper.");
+        showFoxMessage("Hey! Let me in! We can be friends!");
         showPopup("FoxSearch Access", "Allow file access?", "Allow", "Deny");
     }
 }
