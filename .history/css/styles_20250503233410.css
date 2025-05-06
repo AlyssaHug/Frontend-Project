@@ -518,13 +518,15 @@ body {
 .fox {
     position: relative;
 }
+
+#fox-container {
+    position: fixed;
+    bottom: 40px;
+    right: 40px;
+    z-index: 1000;
+}
+
 .foxy {
     width: 20em;
-    position: absolute;
-    bottom: -7em;
-    right: -5em;
-}
-.highlight {
-    color: red;
-    font-weight: bold;
+    cursor: pointer;
 }
