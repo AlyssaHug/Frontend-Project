@@ -16,7 +16,10 @@ const gameState = {
     stage: 0, // 0: Introduction, 1: Suspicion, 2: Unease, 3: Obsession, 4: Collapse
     interactions: 0,
     popupsClosed: 0,
+    organizedFiles: 0,
+    deletedFiles: 0,
     codeLetters: [],
+    searches: [],
     codeParts: [],
     codeWord: [randomFirstCode, randomSecondCode], // Randomized codes
     revealedCode: "",
@@ -1030,7 +1033,7 @@ function checkStageProgress() {
         }
     } else if (gameState.stage === 1) {
         if (
-            gameState.organizedFiles >= 13 &&
+            gameState.organizedFiles >= 9 &&
             gameState.searches.length >= 5 &&
             gameState.popupsClosed >= 2
         ) {
@@ -1041,7 +1044,7 @@ function checkStageProgress() {
         }
     } else if (gameState.stage === 2) {
         if (
-            gameState.deletedFiles >= 5 &&
+            gameState.deletedFiles >= 3 &&
             gameState.searches.length >= 7 &&
             gameState.codeLetters.length >= 3
         ) {
@@ -1053,9 +1056,9 @@ function checkStageProgress() {
         }
     } else if (gameState.stage === 3) {
         if (
-            gameState.organizedFiles >= 23 &&
+            gameState.organizedFiles >= 13 &&
             gameState.searches.length >= 10 &&
-            gameState.puzzleMatches >= 5
+            gameState.puzzleMatches >= 4
         ) {
             gameState.stage = 4;
             showFoxMessage("We're one. No code can split us.");
@@ -1066,7 +1069,7 @@ function checkStageProgress() {
         if (
             gameState.codeParts.includes(gameState.codeWord[0]) &&
             gameState.codeParts.includes(gameState.codeWord[1]) &&
-            gameState.popupsClosed >= 5
+            gameState.popupsClosed >= 3
         ) {
             if (gameState.popupInterval) {
                 clearInterval(gameState.popupInterval);
